@@ -47,9 +47,9 @@ export class HomePage {
     let alert = this.alertCtrl.create({
       title: 'Deletar Tarefa?',
       message: 'Não será possivel reverter a ação.',
-      buttons: [{ text: 'Cancelar', role: 'cancel', cssClass: 'danger' },
+      buttons: [{ text: 'Cancelar', role: 'cancel',cssClass:'button-cancel' },
       {
-        text: 'Deletar', handler: () => {
+        text: 'Deletar', cssClass:'button-danger', handler: () => {
           (this.items).splice(index, 1);
           this.dataService.save(this.items);
         }
@@ -64,7 +64,7 @@ export class HomePage {
       title: 'Atualizar Tarefa?',
       message: 'Digite sua nova tarefa para atualizar.',
       inputs: [{ name: 'title', placeholder: 'Title', value: this.items[index].title }, { name: 'description', placeholder: 'Description', value: this.items[index].description }],
-      buttons: [{ text: 'Cancelar', role: 'cancel', cssClass: 'danger' },
+      buttons: [{ text: 'Cancelar', role: 'cancel', cssClass:'button-cancel' },
       {
         text: 'Atualizar', handler: data => {
           this.items[index].title = data.title;

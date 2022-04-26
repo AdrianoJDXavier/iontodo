@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-grid>
     <ion-row *ngFor="let item of items; let i = index;">
       <ion-col (click)="viewItem(item)" col-8>
         {{item.title}}
@@ -26,6 +26,6 @@
         </button>
       </ion-col>
     </ion-row>
-  </ion-list>
+  </ion-grid>
 
 </ion-content>
