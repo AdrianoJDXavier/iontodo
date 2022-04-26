@@ -18,3 +18,8 @@ Rodando o projeto
 ```bash
   ionic serve -l
 ```
+
+Install @ionic/app-scripts? (Y/n) 
+```bash
+  Y
+```
