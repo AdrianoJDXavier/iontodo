@@ -11,12 +11,16 @@
 
 <ion-content>
   <ion-list>
-    <ion-row *ngFor="let item of items; let i = index;" (click)="viewItem(item)">
-      <ion-col>
+    <ion-row *ngFor="let item of items; let i = index;">
+      <ion-col (click)="viewItem(item)" col-8>
         {{item.title}}
       </ion-col>
-      
-      <ion-col>
+      <ion-col col-2>
+        <button ion-button end clear icon-only (click)="updateItem(i)">
+          <ion-icon color="secondary" name="create"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-2>
         <button ion-button end clear icon-only (click)="deleteItem(i)">
           <ion-icon color="danger" name="trash"></ion-icon>
         </button>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController } from 'ionic-angular';
+import { AlertController, ModalController, NavController } from 'ionic-angular';
 import { Data } from '../../providers/data/data';
 import { AddItemPage } from '../add-item/add-item';
 import { ItemDetailPage } from '../item-detail/item-detail';
@@ -9,26 +9,22 @@ import { ItemDetailPage } from '../item-detail/item-detail';
 })
 export class HomePage {
 
-  public items = [ ];
+  public items = [];
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data, public alertCtrl: AlertController) {
 
     this.dataService.getData().then((todos) => {
-      if(todos) {
+      if (todos) {
         this.items = todos;
       }
     });
-  }
-
-  ionViewDidLoad() {
-    
   }
 
   addItem() {
     let addModal = this.modalCtrl.create(AddItemPage);
 
     addModal.onDidDismiss((item) => {
-      if(item) {
+      if (item) {
         this.saveItem(item);
       }
     });
@@ -48,14 +44,37 @@ export class HomePage {
   }
 
   deleteItem(index) {
-    (this.items).splice(index, 1);
-    this.dataService.save(this.items);
+    let alert = this.alertCtrl.create({
+      title: 'Deletar Tarefa?',
+      message: 'Não será possivel reverter a ação.',
+      buttons: [{ text: 'Cancelar', role: 'cancel', cssClass: 'danger' },
+      {
+        text: 'Deletar', handler: () => {
+          (this.items).splice(index, 1);
+          this.dataService.save(this.items);
+        }
+      }
+      ]
+    });
+    alert.present();
   }
 
-  const AtualizaTarefa = ({ target }, index) => {
-    const copiaTarefa = Array.from(tarefas);
-    copiaTarefa.splice(index, 1, { id: index, value: target.value });
-    setTarefas(copiaTarefa);
+  updateItem(index) {
+    let alert = this.alertCtrl.create({
+      title: 'Atualizar Tarefa?',
+      message: 'Digite sua nova tarefa para atualizar.',
+      inputs: [{ name: 'title', placeholder: 'Title', value: this.items[index].title }, { name: 'description', placeholder: 'Description', value: this.items[index].description }],
+      buttons: [{ text: 'Cancelar', role: 'cancel', cssClass: 'danger' },
+      {
+        text: 'Atualizar', handler: data => {
+          this.items[index].title = data.title;
+          this.items[index].description = data.description;
+          this.dataService.save(this.items);
+        }
+      }
+      ]
+    });
+    alert.present();
   }
 
 }
