@@ -1,3 +1,39 @@
-page-home {
+ion-grid {
+    border-collapse: collapse;
+    border-style: hidden;
+    padding: 3% !important;
 
+    ion-col {
+        border-bottom: 0;
+        border-right: 0;
+        border-bottom: 1px solid rgba($color: #dad3d3, $alpha: 1.0);
+    }
+}
+
+ion-alert {
+    padding: 15% !important;
+    align-items: center !important;
+
+    .alert-wrapper {
+        opacity: 0.9 !important;
+        border-radius: 10px !important;
+    }
+
+    .alert-button {
+        background-color: #32db64 !important;
+        color: aliceblue !important;
+        border-radius: 5px !important;
+    }
+
+    .button-danger{
+        background-color: rgb(192, 57, 57) !important;
+    }
+
+    .button-cancel{
+        background-color: rgb(128, 117, 117) !important;
+    }
+
+    .alert-message, .alert-head{
+        text-align: center !important;
+    }
 }
